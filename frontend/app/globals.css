@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #f8fafc;
+  --color-foreground: #0f172a;
+  --color-primary: #2563eb;
+  --color-secondary: #64748b;
+  --color-accent: #10b981;
+  --color-error: #ef4444;
+  --color-glass: rgba(255, 255, 255, 0.7);
+}
+
+:root {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: 'Inter', sans-serif;
+}
+
+.chat-bubble {
+  @apply max-w-[80%] p-4 rounded-2xl shadow-sm mb-4;
+}
+
+.chat-bubble-ai {
+  @apply bg-white border border-slate-100 self-start text-slate-800;
+}
+
+.chat-bubble-user {
+  @apply bg-blue-600 text-white self-end ml-auto;
+}
+
+.glass-card {
+  background: var(--color-glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

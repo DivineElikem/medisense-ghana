@@ -1,0 +1,642 @@
+{
+    "regions": [
+        {
+            "id": "tropical",
+            "name": "Tropical / Sub-Saharan Africa / Southeast Asia",
+            "description": "High malaria, dengue risk"
+        },
+        {
+            "id": "temperate",
+            "name": "Temperate (Europe / North America / Australia)",
+            "description": "Low tropical disease risk"
+        },
+        {
+            "id": "south_asia",
+            "name": "South Asia (India, Pakistan, Bangladesh)",
+            "description": "Moderate typhoid, dengue risk"
+        }
+    ],
+    "duration_options": [
+        {
+            "id": "less_24h",
+            "text": "Less than 24 hours",
+            "weight": 0.5
+        },
+        {
+            "id": "1_3_days",
+            "text": "1-3 days",
+            "weight": 1.0
+        },
+        {
+            "id": "4_7_days",
+            "text": "4-7 days",
+            "weight": 1.5
+        },
+        {
+            "id": "over_week",
+            "text": "More than a week",
+            "weight": 2.0
+        }
+    ],
+    "severity_options": [
+        {
+            "id": "mild",
+            "text": "Mild",
+            "weight": 0.7
+        },
+        {
+            "id": "moderate",
+            "text": "Moderate",
+            "weight": 1.0
+        },
+        {
+            "id": "severe",
+            "text": "Severe",
+            "weight": 1.5
+        }
+    ],
+    "symptoms": [
+        {
+            "id": "fever",
+            "text": "Do you have a fever?",
+            "type": "boolean",
+            "information_gain": 0.7,
+            "follow_up": {
+                "duration": true,
+                "severity": true,
+                "duration_text": "How long have you had the fever?",
+                "severity_text": "How would you rate the fever?"
+            }
+        },
+        {
+            "id": "cough",
+            "text": "Do you have a cough?",
+            "type": "boolean",
+            "information_gain": 0.65,
+            "follow_up": {
+                "duration": true,
+                "duration_text": "How long have you had the cough?"
+            }
+        },
+        {
+            "id": "chest_pain",
+            "text": "Are you experiencing any chest pain?",
+            "type": "boolean",
+            "information_gain": 0.9,
+            "follow_up": {
+                "severity": true,
+                "severity_text": "How severe is the chest pain?"
+            }
+        },
+        {
+            "id": "difficulty_breathing",
+            "text": "Are you having difficulty breathing?",
+            "type": "boolean",
+            "information_gain": 0.95,
+            "follow_up": {
+                "severity": true,
+                "severity_text": "How severe is the breathing difficulty?"
+            }
+        },
+        {
+            "id": "headache",
+            "text": "Do you have a headache?",
+            "type": "boolean",
+            "information_gain": 0.5,
+            "follow_up": {
+                "duration": true,
+                "severity": true,
+                "duration_text": "How long have you had the headache?",
+                "severity_text": "How severe is the headache?"
+            }
+        },
+        {
+            "id": "fatigue",
+            "text": "Are you feeling unusually tired or fatigued?",
+            "type": "boolean",
+            "information_gain": 0.4,
+            "follow_up": {
+                "duration": true,
+                "duration_text": "How long have you been feeling fatigued?"
+            }
+        },
+        {
+            "id": "abdominal_pain",
+            "text": "Are you experiencing abdominal pain?",
+            "type": "boolean",
+            "information_gain": 0.7,
+            "follow_up": {
+                "severity": true,
+                "severity_text": "How severe is the abdominal pain?"
+            }
+        },
+        {
+            "id": "chills",
+            "text": "Are you experiencing chills or shivering?",
+            "type": "boolean",
+            "information_gain": 0.75
+        },
+        {
+            "id": "joint_pain",
+            "text": "Do you have pain in your joints?",
+            "type": "boolean",
+            "information_gain": 0.55,
+            "follow_up": {
+                "severity": true,
+                "severity_text": "How severe is the joint pain?"
+            }
+        },
+        {
+            "id": "muscle_pain",
+            "text": "Are you experiencing muscle aches?",
+            "type": "boolean",
+            "information_gain": 0.5
+        },
+        {
+            "id": "nausea",
+            "text": "Do you feel nauseous or have you been vomiting?",
+            "type": "boolean",
+            "information_gain": 0.6
+        },
+        {
+            "id": "skin_rash",
+            "text": "Have you noticed any new skin rashes?",
+            "type": "boolean",
+            "information_gain": 0.85,
+            "discriminating": true
+        },
+        {
+            "id": "runny_nose",
+            "text": "Do you have a runny or stuffy nose?",
+            "type": "boolean",
+            "information_gain": 0.6
+        },
+        {
+            "id": "sore_throat",
+            "text": "Do you have a sore throat?",
+            "type": "boolean",
+            "information_gain": 0.6
+        },
+        {
+            "id": "diarrhea",
+            "text": "Are you experiencing diarrhea?",
+            "type": "boolean",
+            "information_gain": 0.7
+        },
+        {
+            "id": "loss_of_appetite",
+            "text": "Have you lost your appetite?",
+            "type": "boolean",
+            "information_gain": 0.45
+        },
+        {
+            "id": "sweating",
+            "text": "Have you been experiencing excessive sweating?",
+            "type": "boolean",
+            "information_gain": 0.65
+        },
+        {
+            "id": "stiff_neck",
+            "text": "Do you have a stiff or painful neck?",
+            "type": "boolean",
+            "information_gain": 0.9,
+            "discriminating": true
+        }
+    ],
+    "diseases": [
+        {
+            "id": "malaria",
+            "name": "Malaria",
+            "symptoms": {
+                "fever": 0.95,
+                "headache": 0.6,
+                "chills": 0.85,
+                "fatigue": 0.7,
+                "muscle_pain": 0.5,
+                "nausea": 0.4,
+                "sweating": 0.8
+            },
+            "symptom_combinations": [
+                {
+                    "symptoms": [
+                        "fever",
+                        "chills",
+                        "sweating"
+                    ],
+                    "boost": 2.5,
+                    "name": "Classic malaria triad"
+                },
+                {
+                    "symptoms": [
+                        "fever",
+                        "chills",
+                        "headache"
+                    ],
+                    "boost": 1.8,
+                    "name": "Common malaria presentation"
+                }
+            ],
+            "rules_out": {
+                "runny_nose": 0.5,
+                "sore_throat": 0.4,
+                "cough": 0.3
+            },
+            "risk_factors": {
+                "recent_travel": 0.5,
+                "mosquito_exposure": 0.8
+            },
+            "regional_prevalence": {
+                "tropical": 3.0,
+                "south_asia": 1.5,
+                "temperate": 0.1
+            },
+            "prevalence": 0.05,
+            "warning_signs": [
+                "Confusion or altered consciousness",
+                "Severe fatigue or weakness",
+                "Yellowing of skin or eyes",
+                "Dark or bloody urine",
+                "Convulsions or seizures"
+            ],
+            "recommended_tests": [
+                "Blood smear microscopy",
+                "Rapid diagnostic test (RDT)",
+                "Complete blood count (CBC)"
+            ]
+        },
+        {
+            "id": "typhoid",
+            "name": "Typhoid fever",
+            "symptoms": {
+                "fever": 0.9,
+                "abdominal_pain": 0.8,
+                "headache": 0.55,
+                "nausea": 0.5,
+                "fatigue": 0.65,
+                "loss_of_appetite": 0.7,
+                "diarrhea": 0.6
+            },
+            "symptom_combinations": [
+                {
+                    "symptoms": [
+                        "fever",
+                        "abdominal_pain",
+                        "loss_of_appetite"
+                    ],
+                    "boost": 2.0,
+                    "name": "Typhoid triad"
+                }
+            ],
+            "rules_out": {
+                "runny_nose": 0.6,
+                "sore_throat": 0.5,
+                "chills": 0.3
+            },
+            "risk_factors": {
+                "contaminated_food": 0.7,
+                "poor_sanitation": 0.6
+            },
+            "regional_prevalence": {
+                "tropical": 2.0,
+                "south_asia": 2.5,
+                "temperate": 0.2
+            },
+            "prevalence": 0.03,
+            "warning_signs": [
+                "Persistent high fever over 39°C (102°F)",
+                "Severe abdominal pain or distension",
+                "Blood in stool",
+                "Confusion or delirium",
+                "Rapid breathing"
+            ],
+            "recommended_tests": [
+                "Blood culture",
+                "Widal test",
+                "Stool culture"
+            ]
+        },
+        {
+            "id": "viral_fever",
+            "name": "Viral fever",
+            "symptoms": {
+                "fever": 0.95,
+                "headache": 0.6,
+                "fatigue": 0.75,
+                "muscle_pain": 0.7,
+                "joint_pain": 0.5,
+                "chills": 0.5,
+                "runny_nose": 0.4
+            },
+            "symptom_combinations": [
+                {
+                    "symptoms": [
+                        "fever",
+                        "muscle_pain",
+                        "fatigue"
+                    ],
+                    "boost": 1.5,
+                    "name": "General viral syndrome"
+                }
+            ],
+            "rules_out": {
+                "abdominal_pain": 0.4,
+                "diarrhea": 0.3
+            },
+            "risk_factors": {
+                "contact_with_sick": 0.6,
+                "seasonal": 0.5
+            },
+            "regional_prevalence": {
+                "tropical": 1.0,
+                "south_asia": 1.0,
+                "temperate": 1.0
+            },
+            "prevalence": 0.15,
+            "warning_signs": [
+                "Fever lasting more than 5 days",
+                "Difficulty breathing",
+                "Severe headache with stiff neck",
+                "Persistent vomiting",
+                "Rash that doesn't fade when pressed"
+            ],
+            "recommended_tests": [
+                "Complete blood count (CBC)",
+                "Viral panel test",
+                "C-reactive protein (CRP)"
+            ]
+        },
+        {
+            "id": "common_cold",
+            "name": "Common cold",
+            "symptoms": {
+                "cough": 0.85,
+                "runny_nose": 0.9,
+                "sore_throat": 0.7,
+                "headache": 0.3,
+                "fatigue": 0.35,
+                "muscle_pain": 0.2
+            },
+            "symptom_combinations": [
+                {
+                    "symptoms": [
+                        "runny_nose",
+                        "sore_throat",
+                        "cough"
+                    ],
+                    "boost": 2.0,
+                    "name": "Classic cold symptoms"
+                }
+            ],
+            "rules_out": {
+                "fever": 0.4,
+                "chills": 0.5,
+                "sweating": 0.6,
+                "abdominal_pain": 0.7
+            },
+            "risk_factors": {
+                "contact_with_sick": 0.6,
+                "seasonal": 0.4
+            },
+            "regional_prevalence": {
+                "tropical": 0.8,
+                "south_asia": 1.0,
+                "temperate": 1.2
+            },
+            "prevalence": 0.2,
+            "warning_signs": [
+                "Symptoms lasting more than 10 days",
+                "High fever (over 39°C / 102°F)",
+                "Severe sinus pain",
+                "Shortness of breath",
+                "Worsening symptoms after initial improvement"
+            ],
+            "recommended_tests": [
+                "Usually no tests needed",
+                "Throat swab if strep is suspected"
+            ]
+        },
+        {
+            "id": "pneumonia",
+            "name": "Pneumonia",
+            "symptoms": {
+                "fever": 0.8,
+                "cough": 0.9,
+                "difficulty_breathing": 0.85,
+                "chest_pain": 0.7,
+                "fatigue": 0.65,
+                "chills": 0.6
+            },
+            "symptom_combinations": [
+                {
+                    "symptoms": [
+                        "cough",
+                        "fever",
+                        "difficulty_breathing"
+                    ],
+                    "boost": 2.5,
+                    "name": "Pneumonia triad"
+                },
+                {
+                    "symptoms": [
+                        "cough",
+                        "chest_pain",
+                        "fever"
+                    ],
+                    "boost": 1.8,
+                    "name": "Common pneumonia presentation"
+                }
+            ],
+            "rules_out": {
+                "runny_nose": 0.3,
+                "diarrhea": 0.5
+            },
+            "risk_factors": {
+                "age_over_65": 0.4,
+                "weakened_immune": 0.6,
+                "smoking": 0.5
+            },
+            "regional_prevalence": {
+                "tropical": 1.0,
+                "south_asia": 1.0,
+                "temperate": 1.0
+            },
+            "prevalence": 0.02,
+            "warning_signs": [
+                "Severe difficulty breathing",
+                "Chest pain when breathing",
+                "Coughing up blood",
+                "Bluish lips or fingernails",
+                "Confusion (especially in older adults)"
+            ],
+            "recommended_tests": [
+                "Chest X-ray",
+                "Pulse oximetry",
+                "Sputum culture",
+                "Complete blood count (CBC)"
+            ]
+        },
+        {
+            "id": "dengue",
+            "name": "Dengue fever",
+            "symptoms": {
+                "fever": 0.95,
+                "headache": 0.8,
+                "joint_pain": 0.85,
+                "muscle_pain": 0.75,
+                "skin_rash": 0.6,
+                "fatigue": 0.6,
+                "nausea": 0.5
+            },
+            "symptom_combinations": [
+                {
+                    "symptoms": [
+                        "fever",
+                        "joint_pain",
+                        "skin_rash"
+                    ],
+                    "boost": 2.5,
+                    "name": "Dengue triad"
+                },
+                {
+                    "symptoms": [
+                        "fever",
+                        "headache",
+                        "joint_pain"
+                    ],
+                    "boost": 2.0,
+                    "name": "Breakbone fever pattern"
+                }
+            ],
+            "rules_out": {
+                "runny_nose": 0.6,
+                "sore_throat": 0.5,
+                "cough": 0.5,
+                "diarrhea": 0.4
+            },
+            "risk_factors": {
+                "mosquito_exposure": 0.8,
+                "recent_travel": 0.5
+            },
+            "regional_prevalence": {
+                "tropical": 2.5,
+                "south_asia": 2.0,
+                "temperate": 0.05
+            },
+            "prevalence": 0.04,
+            "warning_signs": [
+                "Severe abdominal pain",
+                "Persistent vomiting",
+                "Bleeding gums or nose",
+                "Blood in vomit or stool",
+                "Rapid breathing"
+            ],
+            "recommended_tests": [
+                "NS1 antigen test",
+                "Dengue IgM/IgG antibody test",
+                "Complete blood count (CBC)",
+                "Platelet count"
+            ]
+        }
+    ],
+    "triage_rules": [
+        {
+            "id": "severe_breathing",
+            "if": {
+                "difficulty_breathing": true
+            },
+            "then": {
+                "emergency": true,
+                "message": "Difficulty breathing can be a sign of a serious medical emergency. Please seek immediate medical attention or call emergency services."
+            },
+            "priority": 1
+        },
+        {
+            "id": "severe_chest_pain",
+            "if": {
+                "chest_pain": true
+            },
+            "then": {
+                "emergency": true,
+                "message": "Chest pain can be a sign of a cardiac emergency. Please seek immediate medical attention or call emergency services."
+            },
+            "priority": 2
+        },
+        {
+            "id": "meningitis_warning",
+            "if": {
+                "stiff_neck": true,
+                "fever": true,
+                "headache": true
+            },
+            "then": {
+                "emergency": true,
+                "message": "The combination of stiff neck, fever, and headache may indicate meningitis. Please seek immediate medical attention."
+            },
+            "priority": 3
+        }
+    ],
+    "baseline_questions": [
+        {
+            "id": "age",
+            "text": "What is your age?",
+            "type": "number",
+            "required": true,
+            "validation": {
+                "min": 0,
+                "max": 120
+            }
+        },
+        {
+            "id": "sex",
+            "text": "What is your sex?",
+            "type": "choice",
+            "options": [
+                "Male",
+                "Female",
+                "Other"
+            ],
+            "required": true
+        },
+        {
+            "id": "region",
+            "text": "Where are you currently located?",
+            "type": "choice",
+            "options": [
+                "Tropical / Africa / Southeast Asia",
+                "South Asia (India, Pakistan)",
+                "Temperate (Europe / N. America)"
+            ],
+            "required": true
+        },
+        {
+            "id": "temperature",
+            "text": "Do you know your current body temperature?",
+            "type": "number",
+            "unit": "°C",
+            "required": false,
+            "validation": {
+                "min": 35,
+                "max": 42
+            },
+            "allow_unknown": true
+        },
+        {
+            "id": "heart_rate",
+            "text": "Do you know your current heart rate (pulse)?",
+            "type": "number",
+            "unit": "bpm",
+            "required": false,
+            "validation": {
+                "min": 40,
+                "max": 200
+            },
+            "allow_unknown": true
+        }
+    ],
+    "empathy_statements": [
+        "I understand this can be uncomfortable. Let me ask a few more questions.",
+        "Thank you for sharing that. A couple more questions will help me understand better.",
+        "I appreciate your patience. We're making good progress.",
+        "That's helpful information. Just a few more details needed."
+    ]
+}
