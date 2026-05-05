@@ -264,12 +264,8 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center p-2 sm:p-4 md:p-12 bg-slate-50">
-      <div className="z-10 w-full max-w-2xl flex items-center justify-between mb-6">
-        <div className="flex items-center gap-2">
-          <h1 className="text-xl font-bold text-blue-800 tracking-tight">Medisense Ghana</h1>
-          <img src="/ghanaFlag.png" alt="Ghana" className="w-7 h-4 rounded shadow-sm object-cover" />
-        </div>
-        <span className="text-xs text-slate-500 font-medium">Digital Nurse</span>
+      <div className="z-10 w-full max-w-2xl flex items-center justify-center mb-6">
+        <h1 className="text-xl font-bold text-blue-800 tracking-tight">AI Doctor</h1>
       </div>
 
       {/* Progress Indicator */}
@@ -614,9 +610,9 @@ export default function Home() {
 
       {/* Footer with branding */}
       <div className="mt-8 flex flex-col items-center gap-4 pb-4">
-        <img src="/gstep.png" alt="GSTEP Logo" className="h-12 sm:h-16 object-contain" />
+        <img src="/crystalHeights.jpeg" alt="Crystal Heights Logo" className="h-16 sm:h-20 object-contain" />
         <p className="text-slate-400 text-xs uppercase tracking-[0.15em] font-medium text-center">
-          Ghana Science & Tech Explorer Prize • Safety First
+          Made by Crystal Heights International School
         </p>
       </div>
     </main>
