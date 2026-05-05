@@ -19,9 +19,28 @@ class ReasoningEngine:
         for rule in self.kb["triage_rules"]:
             condition_met = True
             for key, val in rule["if"].items():
-                if state.answers.get(key) != val:
+                user_val = state.answers.get(key)
+                
+                # Support comparison operators for numerical values
+                if isinstance(val, dict):
+                    if user_val is None or user_val == "unknown":
+                        condition_met = False
+                        break
+                    
+                    try:
+                        num_user_val = float(user_val)
+                        if ">" in val and not (num_user_val > val[">"]):
+                            condition_met = False
+                        if "<" in val and not (num_user_val < val["<"]):
+                            condition_met = False
+                    except (ValueError, TypeError):
+                        condition_met = False
+                
+                # Standard equality check
+                elif user_val != val:
                     condition_met = False
                     break
+                    
             if condition_met:
                 return rule["then"]
         return None
@@ -48,7 +67,30 @@ class ReasoningEngine:
             # Base score from prevalence (with regional adjustment)
             base_prevalence = disease["prevalence"]
             regional_mult = disease.get("regional_prevalence", {}).get(region, 1.0)
-            score = base_prevalence * regional_mult
+            
+            # Age-based risk adjustment
+            age = state.answers.get("age")
+            age_mult = 1.0
+            if age is not None and age != "unknown":
+                try:
+                    age_val = float(age)
+                    if disease["id"] == "pneumonia" and age_val > 65:
+                        age_mult = 1.5
+                    elif disease["id"] == "common_cold" and age_val < 10:
+                        age_mult = 1.2
+                except (ValueError, TypeError):
+                    pass
+            
+            score = base_prevalence * regional_mult * age_mult
+            
+            # Automatic symptom inference from numerical data
+            temp = state.answers.get("temperature")
+            if temp is not None and temp != "unknown":
+                try:
+                    if float(temp) >= 37.5:
+                        state.answers["fever"] = True
+                except (ValueError, TypeError):
+                    pass
             
             # Symptom-based scoring with duration/severity
             for symptom_id, weight in disease["symptoms"].items():

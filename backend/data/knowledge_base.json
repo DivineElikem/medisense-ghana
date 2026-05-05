@@ -573,6 +573,28 @@
                 "message": "The combination of stiff neck, fever, and headache may indicate meningitis. Please seek immediate medical attention."
             },
             "priority": 3
+        },
+        {
+            "id": "hyperpyrexia",
+            "if": {
+                "temperature": { ">": 41.0 }
+            },
+            "then": {
+                "emergency": true,
+                "message": "A temperature above 41°C (105.8°F) is a medical emergency (hyperpyrexia). Please seek immediate medical attention."
+            },
+            "priority": 4
+        },
+        {
+            "id": "extreme_tachycardia",
+            "if": {
+                "heart_rate": { ">": 180 }
+            },
+            "then": {
+                "emergency": true,
+                "message": "An extremely high heart rate can be life-threatening. Please seek immediate medical attention."
+            },
+            "priority": 5
         }
     ],
     "baseline_questions": [
@@ -583,7 +605,7 @@
             "required": true,
             "validation": {
                 "min": 0,
-                "max": 120
+                "max": 122
             }
         },
         {
@@ -615,8 +637,8 @@
             "unit": "°C",
             "required": false,
             "validation": {
-                "min": 35,
-                "max": 42
+                "min": 30,
+                "max": 45
             },
             "allow_unknown": true
         },
@@ -627,8 +649,8 @@
             "unit": "bpm",
             "required": false,
             "validation": {
-                "min": 40,
-                "max": 200
+                "min": 20,
+                "max": 300
             },
             "allow_unknown": true
         }
