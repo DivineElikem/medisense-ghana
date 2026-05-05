@@ -283,7 +283,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center p-2 sm:p-4 md:p-12 bg-slate-50">
       <div className="z-10 w-full max-w-2xl flex items-center justify-center mb-6">
-        <h1 className="text-xl font-bold text-blue-800 tracking-tight">AI Doctor</h1>
+        <h1 className="text-xl font-bold text-blue-800 tracking-tight">Crystal AI Doctor</h1>
       </div>
 
       {/* Progress Indicator */}

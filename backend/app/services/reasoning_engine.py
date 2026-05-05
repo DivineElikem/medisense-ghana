@@ -123,6 +123,22 @@ class ReasoningEngine:
                 if answer is True:
                     score *= (1 + factor_weight * 0.5)
             
+            # Apply mandatory symptom check (Prerequisites)
+            mandatory = disease.get("mandatory_symptoms", [])
+            if mandatory:
+                has_any_mandatory = any(state.answers.get(s) is True for s in mandatory)
+                
+                # Check if all mandatory symptoms have been asked/answered
+                all_mandatory_asked = all(s in state.answers for s in mandatory)
+                
+                if not has_any_mandatory and all_mandatory_asked:
+                    # If all were asked and none are present, this is a very strong rule-out
+                    score *= 0.01 
+                elif not has_any_mandatory:
+                    # If not all asked but none present yet, slightly reduce probability 
+                    # to favor diseases where we DO have mandatory evidence
+                    score *= 0.5
+            
             scores[disease["name"]] = max(score, 0.001)
         
         # Normalize to sum to 1
@@ -159,16 +175,16 @@ class ReasoningEngine:
         return max_boost
 
     def _apply_rule_outs(self, disease: Dict[str, Any], state: SessionState) -> float:
-        """Apply rule-out logic: if a symptom is explicitly False, reduce probability."""
+        """Apply rule-out logic: if a symptom is present that is rare for this disease, reduce probability."""
         rules_out = disease.get("rules_out", {})
         factor = 1.0
         
         for symptom_id, reduction in rules_out.items():
-            # Only apply if symptom is explicitly False (not unknown)
-            if state.answers.get(symptom_id) is False:
+            # Apply reduction if symptom is explicitly True (present)
+            if state.answers.get(symptom_id) is True:
                 factor *= (1.0 - reduction)
         
-        return max(factor, 0.1)  # Never reduce by more than 90%
+        return max(factor, 0.05)  # Never reduce by more than 95%
 
 
     def get_symptom_mapping(self, state: SessionState) -> Dict[str, List[str]]:

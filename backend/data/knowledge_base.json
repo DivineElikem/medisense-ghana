@@ -236,6 +236,7 @@
                     "name": "Common malaria presentation"
                 }
             ],
+            "mandatory_symptoms": ["fever", "chills", "sweating"],
             "rules_out": {
                 "runny_nose": 0.5,
                 "sore_throat": 0.4,
@@ -287,6 +288,7 @@
                     "name": "Typhoid triad"
                 }
             ],
+            "mandatory_symptoms": ["fever", "abdominal_pain"],
             "rules_out": {
                 "runny_nose": 0.6,
                 "sore_throat": 0.5,
@@ -338,6 +340,7 @@
                     "name": "General viral syndrome"
                 }
             ],
+            "mandatory_symptoms": ["fever", "headache", "fatigue"],
             "rules_out": {
                 "abdominal_pain": 0.4,
                 "diarrhea": 0.3
@@ -387,6 +390,7 @@
                     "name": "Classic cold symptoms"
                 }
             ],
+            "mandatory_symptoms": ["cough", "runny_nose", "sore_throat"],
             "rules_out": {
                 "fever": 0.4,
                 "chills": 0.5,
@@ -446,6 +450,7 @@
                     "name": "Common pneumonia presentation"
                 }
             ],
+            "mandatory_symptoms": ["cough", "fever", "difficulty_breathing"],
             "rules_out": {
                 "runny_nose": 0.3,
                 "diarrhea": 0.5
@@ -507,6 +512,7 @@
                     "name": "Breakbone fever pattern"
                 }
             ],
+            "mandatory_symptoms": ["fever", "joint_pain", "muscle_pain", "skin_rash"],
             "rules_out": {
                 "runny_nose": 0.6,
                 "sore_throat": 0.5,

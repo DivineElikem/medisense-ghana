@@ -1,12 +1,12 @@
-# Medisense Ghana
+# Crystal AI Doctor
 
-AI-powered medical symptom triage assistant for Ghana.
+AI-powered medical symptom triage assistant.
 
 ## 🏥 Features
 
 - **Intelligent Symptom Assessment** - Conversational symptom collection
-- **Probabilistic Diagnosis** - Bayesian-style disease probability calculation
-- **Regional Awareness** - Adjusts for tropical disease prevalence in Ghana
+- **Probabilistic Diagnosis** - Weighted disease probability calculation
+- **Global Context** - Adjusts for various regional disease prevalence
 - **Confidence Scoring** - Transparent HIGH/MEDIUM/LOW confidence levels
 - **Mobile Responsive** - Works on phones and desktops
 
@@ -14,17 +14,16 @@ AI-powered medical symptom triage assistant for Ghana.
 
 - **Frontend**: Next.js 14, React, Tailwind CSS
 - **Backend**: FastAPI, Python 3.11+
-- **AI**: Groq LLM API
+- **AI**: Groq LLM API (Llama 3.1)
 
 ## 🚀 Local Development
 
 ### Backend
 ```bash
 cd backend
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env  # Add your GROQ_API_KEY
 uvicorn main:app --reload --port 8000
 ```
 
@@ -49,6 +48,6 @@ Visit `http://localhost:3000`
 GROQ_API_KEY=your_groq_api_key_here
 ```
 
-## 🇬🇭 Ghana Science & Tech Explorer Prize
+## 🏛️ Mission
 
-Built for GSTEP - empowering healthcare accessibility in Ghana.
+Empowering healthcare accessibility through intelligent AI-driven assessment.

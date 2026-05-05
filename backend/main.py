@@ -11,7 +11,7 @@ import os
 # Load environment variables
 load_dotenv()
 
-app = FastAPI(title="Medical Symptom Assessment Bot")
+app = FastAPI(title="Crystal AI Doctor")
 
 app.add_middleware(
     CORSMiddleware,
