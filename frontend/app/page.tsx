@@ -130,13 +130,13 @@ export default function Home() {
 
   const validateTemperature = (value: number): boolean => {
     if (tempUnit === 'C') {
-      if (value < 35 || value > 42) {
-        setInputError("Temperature should be between 35°C and 42°C");
+      if (value < 30 || value > 45) {
+        setInputError("Please enter a valid temperature between 30°C and 45°C");
         return false;
       }
     } else {
-      if (value < 95 || value > 107.6) {
-        setInputError("Temperature should be between 95°F and 107.6°F");
+      if (value < 86 || value > 113) {
+        setInputError("Please enter a valid temperature between 86°F and 113°F");
         return false;
       }
     }
@@ -159,6 +159,24 @@ export default function Home() {
       if (tempUnit === 'F') {
         answer = convertToCelsius(numValue);
         label = `${numValue}°F (${answer}°C)`;
+      }
+    }
+
+    // Validate heart rate
+    if (currentQuestion.id === 'heart_rate' && currentQuestion.type === 'number') {
+      const numValue = Number(answer);
+      if (numValue < 20 || numValue > 300) {
+        setInputError("Please enter a realistic heart rate (20-300 bpm)");
+        return false;
+      }
+    }
+
+    // Validate age
+    if (currentQuestion.id === 'age' && currentQuestion.type === 'number') {
+      const numValue = Number(answer);
+      if (numValue < 0 || numValue > 122) {
+        setInputError("Please enter a valid age (0-122)");
+        return false;
       }
     }
 
